@@ -5,11 +5,11 @@ This is a scout-plugin for lighttpd's `mod_status` plugin. It supports at least 
 # Configuration
 
 If you don't have it done already, go to (likely to be) `/etc/lighttpd/conf-enabled/` and then create a symbolic link
-at least to 10-status.conf in conf-available directory.  This may be the ticket:
+at least to `10-status.conf` in conf-available directory.  This may be the ticket:
 
     ln -s ../conf-available/10-status.conf .
 
-You will probably need to edit the 10-status.conf file too. Uncommenting the status.status-url is a great start!
+You will probably need to edit the `10-status.conf` file too. Uncommenting the `status.status-url` is a great start! Don't forget to restart.
 
 # Authentication
 

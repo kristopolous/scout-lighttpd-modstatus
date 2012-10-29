@@ -1,7 +1,5 @@
 $VERBOSE = false
 
-require 'net/http'
-
 class LightyLookie < Scout::Plugin
   needs 'net/http'
   needs 'rubygems'

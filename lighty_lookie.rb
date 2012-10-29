@@ -37,7 +37,6 @@ class LightyLookie < Scout::Plugin
         end
 
         res = Net::HTTP.start(uri.host, uri.port) { | http |
-          p YAML::dump(req)
           http.request(req)
         }
 

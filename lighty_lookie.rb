@@ -65,7 +65,7 @@ class LightyLookie < Scout::Plugin
           myCounters += likely_yaml.select { | key, value | counterList.index(key) }
 
           myReport.merge!(likely_yaml.reject { | key, value | 
-            rejectList.index(key) || counterList.index(key) || (key =~ /^fastcgi/ && !(key =~ /^fastcgi.backend.([0-9].){1,2}load$/ ))
+            rejectList.index(key) || counterList.index(key) || (key =~ /^fastcgi.backend/ && !(key =~ /^fastcgi.backend.([0-9].){1,2}load$/ ))
           })
         else
           return error("Payload wasn't yaml. We can't parse #{payload}. Ah shucks'")

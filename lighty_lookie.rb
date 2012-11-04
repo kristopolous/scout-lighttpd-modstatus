@@ -24,6 +24,20 @@ class LightyLookie < Scout::Plugin
 
   def build_report
     counterList = ["Total Accesses", "Total kBytes"]
+    scoreboardMap = {
+      "." => "connect", 
+      "C" => "close", 
+      "E" => "hard error", 
+      "Q" => "request-end",
+      "R" => "read-POST", 
+      "S" => "response-end",
+      "W" => "write", 
+      "h" => "handle-request",
+      "k" => "keep-alive",
+      "q" => "request-start", 
+      "r" => "read", 
+      "s" => "response-start"
+    }
     rejectList = ["Scoreboard"]
 
     begin
@@ -73,6 +87,16 @@ class LightyLookie < Scout::Plugin
       }
 
       bucketMap = {}
+      histogramMap = {}
+
+      myTotal["Scoreboard"].scan(/./).each { | x | 
+        histogramMap[x] = 0 unless histogramMap.has_key? x
+        histogramMap[x] += 1
+      }
+      histogramMap.each { | key, value |
+        myReport["score #{scoreboardMap[key]}"] = value if scoreboardMap.has_key? key
+      }
+
       myTotal.select { | key, value | myReport.keys.index(key).nil? and key =~ /^fastcgi.backend/ }.each { | key, value |
         parts = key.split(/\./)
         # dump fastcgi.backend

@@ -76,7 +76,7 @@ class LightyLookie < Scout::Plugin
 
         if likely_yaml.class == Hash
           myTotal.merge!(likely_yaml)
-          myCounters += likely_yaml.select { | key, value | counterList.index(key) }
+          myCounters += (likely_yaml.select { | key, value | counterList.index(key) }).zip.flatten(1)
 
           myReport.merge!(likely_yaml.reject { | key, value | 
             rejectList.index(key) || counterList.index(key) || (key =~ /^fastcgi.backend/ && !(key =~ /^fastcgi.backend.([0-9].){1,2}load$/ ))
